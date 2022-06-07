@@ -1,0 +1,54 @@
+
+
+<div class="content" role="main">
+  <h1>Step 1: Upload your picture</h1>
+  <input type="file" (change)="onFileChange($event)" />
+
+  <div class="aa" *ngIf="imageUrl">
+    <h1 class="frameTitle">Step 2: Choose frame style</h1>
+    <div class="chooseFrame">
+      <framepicker (frameChanged)="setFrame($event)" class="framepicker"></framepicker>
+      <div class="frameSizeContainer">
+        <div>
+          <div class="frame" [ngStyle]="{'border-color': color,
+            'padding': border+'px',
+            'border-width': frame+'px',
+            'border-image': 'url(' + texture + ') 1',
+            'width': width + 'px',
+            'height': height + 'px'
+          }">
+            <img src="{{imageUrl}}">
+          </div>
+          <h3>Width</h3>
+          <mat-slider aria-label="unit(s)" min="150" max="450" [(ngModel)]="width"></mat-slider>
+        </div>
+        <h3>Height</h3>
+        <mat-slider aria-label="unit(s)" min="150" max="450" [(ngModel)]="height" vertical="true"></mat-slider>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="imageUrl" class="backgroundContainer" >
+    <h1 class="frameTitle">Step 3: Choose Background</h1>
+    <input type="color" [(ngModel)]="backgroundColor" class="inputBackgroundColor">
+    <div #container class="backgroundCard" [ngStyle]="{'background-color': backgroundColor,
+    'width': width+400 + 'px',
+      'height': height+200 + 'px'
+  }">
+      <div class="frame" [ngStyle]="{'border-color': color,
+        'padding': border+'px',
+        'border-width': frame+'px',
+        'border-image': 'url(' + texture + ') 1',
+        'width': width + 'px',
+        'height': height + 'px',
+        'margin': 0
+      }">
+        <img src="{{imageUrl}}">
+      </div>
+    </div>
+
+    <h1 class="frameTitle">Step 3: Download picture</h1>
+    <button mat-raised-button color="primary" (click)="downloadPicture()">Download</button>
+
+  </div>
+</div>

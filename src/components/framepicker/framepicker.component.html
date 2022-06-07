@@ -1,0 +1,14 @@
+<div class="container">
+  <h2>Choose color of frame</h2>
+  <div *ngFor="let c of colors" class="colorpick" [ngStyle]="{'background-color': c.hex}" (click)="color = c.hex; changed()"></div>
+  <h2>Or upload texture for the frame</h2>
+  <input type="file" (change)="onFileChange($event)" />
+  <div class="borderWidth">
+    <mat-slider aria-label="unit(s)" min="8" max="35" [(ngModel)]="value" (change)="changed()"></mat-slider>
+    <span>Thickness of frame</span>
+  </div>
+  <div class="borderWidth">
+    <mat-slider aria-label="unit(s)" min="0" max="20" [(ngModel)]="value2" (change)="changed()"></mat-slider>
+    <span>Thickness of inner border</span>
+  </div>
+</div>
