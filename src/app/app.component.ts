@@ -8,24 +8,26 @@ import { saveAs } from 'file-saver';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'mennr-challenge';
   imageUrl: any;
-  message = '';
-  imagePath = '';
 
+  //Default values for the frame and picture
   color = '#222222';
   border = '4';
   frame = '8';
   texture = '';
   width = 280;
   height = 310;
-  backgroundColor= '#E5E7EE'
 
+  //Default Background Color
+  backgroundColor= '#E5E7EE';
+
+
+  //Container for create final image
   @ViewChild('container') container: any;
 
 
+  // Function to upload and create url
   onFileChange(event: any) {
-    console.log(this.container);
     let reader = new FileReader();
     if(event.target.files && event.target.files.length > 0) {
       let file = event.target.files[0];
@@ -36,21 +38,20 @@ export class AppComponent {
     }
   }
 
-  downloadPicture() {
 
+  // Function create final image and download it using librarys dom-to-image and FileSaver
+  downloadPicture() {
     domtoimage.toJpeg((this.container.nativeElement), { quality: 0.95 })
     .then(function (blob) {
         saveAs(blob, 'my-picture.jpeg');
     });
   }
 
+  // Set frame when any of properties change
   setFrame(obj: any) {
-    console.log(obj);
     this.color = obj.color;
     this.border = obj.border;
     this.frame = obj.frame;
     this.texture = obj.texture;
-    console.log(this.texture);
-    console.log(this.color);
   }
 }
